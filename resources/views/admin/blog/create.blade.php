@@ -27,8 +27,11 @@
                         <option value="">SELECT</option>
                         @foreach ($blogCategories as $blogCategory)                        
                             <option value="{{$blogCategory->id}}" 
-                                @if(old('blog_category_id') == $blogCategory->id) selected 
-                                @elseif($blogCategory->id == $blog->blog_category_id) selected @endif > {{$blogCategory->name}} </option>                            
+                                @if(old('blog_category_id')) 
+                                    @if(old('blog_category_id') == $blogCategory->id) selected @endif
+                                @elseif(isset($blog))
+                                    @if($blogCategory->id == $blog->blog_category_id) selected @endif
+                                @endif> {{$blogCategory->name}} </option>                            
                         @endforeach
                     </select>
                 </label>

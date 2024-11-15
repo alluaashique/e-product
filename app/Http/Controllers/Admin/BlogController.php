@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Trait
+use App\Traits\UploadImageTrait;
 // Controllers
 
 
@@ -23,6 +25,7 @@ use Illuminate\Support\Facades\Log;
 
 class BlogController extends Controller
 {
+    use UploadImageTrait;
     public function index()
     {
         $data['blogs'] = Blog::paginate(10);
@@ -64,9 +67,7 @@ class BlogController extends Controller
             $filePath = null;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $filename = uniqid() . '-' . time() . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('blog', $filename, 'public');
-                $filePath = "blog/".$filename;
+                $filePath = $this->uploadImage($image, 'blog');
             }
             $blogSave = Blog::create([
                 'name' => $request->blog,
@@ -154,10 +155,7 @@ class BlogController extends Controller
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $filename = uniqid() . '-' . time() . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('blog', $filename, 'public');
-                $filePath = "blog/".$filename;
-                
+                $filePath = $this->uploadImage($image, 'blog');
                 $blog->image = $filePath;
             }
 
