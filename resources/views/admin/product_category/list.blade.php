@@ -4,11 +4,11 @@
 <main class="h-full pb-16 overflow-y-auto">
   <div class="container grid px-6 mx-auto">
       <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-          Brands
+        Product Categories
       </h2>
       <!-- With actions -->
-      <a href="{{route('admin.brand.create')}}">
-        <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Create Brand</button>
+      <a href="{{route('admin.product-category.create')}}">
+        <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Create Product Categories</button>
       </a>
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
           <div class="w-full overflow-x-auto">
@@ -25,28 +25,28 @@
                       </tr>
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                      @foreach ($brands as $brand)
+                      @foreach ($product_categories as $product_category)
                         <tr class="text-gray-700 dark:text-gray-400">                          
                           <td class="px-4 py-3 text-sm">
-                            {{$loop->iteration + ($brands->currentPage() - 1) * $brands->perPage()}}
+                            {{$loop->iteration + ($product_categories->currentPage() - 1) * $product_categories->perPage()}}
                           </td>
-                          <td class="px-4 py-3 text-sm">{{$brand->name}}</td>
-                          <td class="px-4 py-3 text-sm">{{substr($brand->short_description,0,150)}}</td>
+                          <td class="px-4 py-3 text-sm">{{$product_category->name}}</td>
+                          <td class="px-4 py-3 text-sm">{{substr($product_category->short_description,0,150)}}</td>
                           <td class="px-4 py-3 text-sm">
-                            <img src="{{asset("storage/".$brand->image)}}" alt="brand-img" height="50px" width="50px" >
+                            <img src="{{asset("storage/".$product_category->image)}}" alt="product-category-img" height="50px" width="50px" >
                           </td>
                           <td>
-                              @if($brand->is_active == 1)
+                              @if($product_category->is_active == 1)
                                   <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                                   Active </span>
-                              @elseif($brand->is_active == 0)
+                              @elseif($product_category->is_active == 0)
                                   <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
                                     Inactive </span>
                               @endif
                           </td>                           
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-                                    <a href="{{route('admin.brand.edit',$brand->id)}}">
+                                    <a href="{{route('admin.product-category.edit',$product_category->id)}}">
                                       <button
                                           class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                           aria-label="Edit">
@@ -58,7 +58,7 @@
                                           </svg>
                                       </button>
                                     </a>
-                                    <a href="javascript:void(0)" class="delete" data-id="{{$brand->id}}">
+                                    <a href="javascript:void(0)" class="delete" data-id="{{$product_category->id}}">
                                       <button
                                           class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                           aria-label="Delete">
@@ -79,7 +79,7 @@
           </div>
 
           {{-- Pagination --}}
-          {{ $brands->links('admin.layout.pagination', ['paginate' => $brands]) }}
+          {{ $product_categories->links('admin.layout.pagination', ['paginate' => $product_categories]) }}
          
       </div>
   </div>
@@ -91,14 +91,14 @@ $(document).ready(function() {
     $('.delete').on('click', function() {
         var id = $(this).data('id');
         // var form = $('#delete_' + id);
-        if (confirm("Are you sure you want to delete this brand?")) {
+        if (confirm("Are you sure you want to delete this product category?")) {
             var current = $(this);
             var currentRow = $(this).closest('tr');
             var form = new FormData();
             form.append("id", id);
             form.append("_token", "{{csrf_token()}}");
             form.append("_method", "DELETE");
-            url = "{{route('admin.brand.destroy',':id')}}";
+            url = "{{route('admin.product-category.destroy',':id')}}";
             url = url.replace(':id', id);
             $.ajax({
                 url: url,
@@ -112,7 +112,7 @@ $(document).ready(function() {
                 contentType: false,
                 success: function(response) {
                   if(response == 1) {
-                    toastr.success("Brand deleted successfully");
+                    toastr.success("Product Category deleted successfully");
                     currentRow.remove();
                   }else {
                     toastr.error("Something went wrong");

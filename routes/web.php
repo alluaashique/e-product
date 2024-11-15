@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactusController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 
 
 //UserController
@@ -64,6 +65,13 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('/brand/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
     Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::delete('/brand/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+
+    Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('product-category.index');
+    Route::get('/product-category/create', [ProductCategoryController::class, 'create'])->name('product-category.create');
+    Route::post('/product-category', [ProductCategoryController::class, 'store'])->name('product-category.store');
+    Route::get('/product-category/{id}/edit', [ProductCategoryController::class, 'edit'])->name('product-category.edit');
+    Route::put('/product-category/{id}', [ProductCategoryController::class, 'update'])->name('product-category.update');
+    Route::delete('/product-category/{id}', [ProductCategoryController::class, 'destroy'])->name('product-category.destroy');
 });
 
 
