@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactusController;
+use App\Http\Controllers\Admin\BrandController;
 
 
 //UserController
@@ -56,6 +57,13 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('/contact-us/{id}/edit', [ContactusController::class, 'edit'])->name('contact-us.edit');
     Route::put('/contact-us/{id}', [ContactusController::class, 'update'])->name('contact-us.update');
     Route::delete('/contact-us/{id}', [ContactusController::class, 'destroy'])->name('contact-us.destroy');
+
+    Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
+    Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
+    Route::post('/brand', [BrandController::class, 'store'])->name('brand.store');
+    Route::get('/brand/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
+    Route::delete('/brand/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
 });
 
 
