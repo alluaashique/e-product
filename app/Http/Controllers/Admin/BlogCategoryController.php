@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Trait
+use App\Traits\UploadImageTrait;
 // Controllers
 
 
@@ -22,6 +24,8 @@ use Illuminate\Support\Facades\Log;
 
 class BlogCategoryController extends Controller
 {
+    use UploadImageTrait;
+
     public function index()
     {
         $data['blogCategories'] = BlogCategory::paginate(10);
@@ -55,12 +59,11 @@ class BlogCategoryController extends Controller
         
         DB::beginTransaction();
         try {
+            $filePath = null;           
             $filePath = null;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $filename = uniqid() . '-' . time() . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('blog_category', $filename, 'public');
-                $filePath = "blog_category/".$filename;
+                $filePath = $this->uploadImage($image, 'blog_category');
             }
             $blogCategorySave = BlogCategory::create([
                 'name' => $request->blogcategory,
@@ -139,11 +142,9 @@ class BlogCategoryController extends Controller
             $blog->is_active = (int) $request->is_active;
 
             if ($request->hasFile('image')) {
+                $deleteOldImage = $this->deleteImage($blog->image);
                 $image = $request->file('image');
-                $filename = uniqid() . '-' . time() . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('blog_category', $filename, 'public');
-                $filePath = "blog_category/".$filename;
-                
+                $filePath = $this->uploadImage($image, 'blog_category');                
                 $blog->image = $filePath;
             }
 
@@ -180,6 +181,7 @@ class BlogCategoryController extends Controller
             if ($isBlogExists) {
                 return 2;
             }
+            $deleteOldImage = $this->deleteImage($blog->image);
             $blog->delete();
             DB::commit();
             return 1;
