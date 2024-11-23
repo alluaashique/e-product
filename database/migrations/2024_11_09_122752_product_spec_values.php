@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_spec_values', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('parent_id')->nullable()->constrained('product_spec_values')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('product_categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();            
             $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
@@ -23,6 +24,9 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        schema::table('product_specs', function (Blueprint $table) {
+            $table->foreignId('product_value_id')->nullable()->after('parent_id')->constrained('product_spec_values')->cascadeOnDelete();
+        });
     }
 
     /**
@@ -30,6 +34,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('product_specs', function (Blueprint $table) {
+            $table->dropForeign(['product_value_id']);
+            $table->dropColumn('product_value_id');
+        });
         Schema::dropIfExists('product_spec_values');
     }
 };
