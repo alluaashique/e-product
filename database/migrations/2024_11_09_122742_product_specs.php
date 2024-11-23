@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('parent_id')->nullable()->constrained('product_specs')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('product_categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();            
-            $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
+            $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();    
+            $table->foreignId('specification_id')->nullable()->constrained('specifications')->cascadeOnDelete();
             $table->string('specification')->nullable();
             $table->tinyInteger('is_quantity')->default(0);
             $table->tinyInteger('is_active')->default(1)->comment('1:active, 0:inactive');

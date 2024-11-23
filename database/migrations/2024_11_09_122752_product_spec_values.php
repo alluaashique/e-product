@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();            
             $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
             $table->foreignId('product_spec_id')->nullable()->constrained('product_specs')->cascadeOnDelete();
+            $table->foreignId('value_id')->nullable()->constrained('values')->cascadeOnDelete();
             $table->string('value')->nullable();            
             $table->decimal('price', 10, 2);
             $table->tinyInteger('is_active')->default(1)->comment('1:active, 0:inactive');
