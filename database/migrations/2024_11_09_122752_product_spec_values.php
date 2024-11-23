@@ -15,10 +15,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('category_id')->nullable()->constrained('product_categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();            
-            $table->foreignId('product_names_id')->nullable()->constrained('product_names')->cascadeOnDelete();
             $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
             $table->foreignId('product_spec_id')->nullable()->constrained('product_specs')->cascadeOnDelete();
-            $table->string('value')->nullable();
+            $table->string('value')->nullable();            
+            $table->decimal('price', 10, 2);
             $table->tinyInteger('is_active')->default(1)->comment('1:active, 0:inactive');
             $table->timestamps();
             $table->softDeletes();
