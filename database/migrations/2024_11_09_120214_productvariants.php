@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained('product_categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();            
             $table->string('name');
+            $table->string('uuid')->unique();
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
             $table->foreignId('unit')->default(3)->comment('1:piece, 11:kg, 21:litre');
             $table->string('quantity')->nullable();
             $table->string('packaging')->nullable();

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactusController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\SpecificationController;
+use App\Http\Controllers\Admin\ProductController;
 
 
 //UserController
@@ -80,6 +81,13 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('/specification/{id}/edit', [SpecificationController::class, 'edit'])->name('specification.edit');
     Route::put('/specification/{id}', [SpecificationController::class, 'update'])->name('specification.update');
     Route::delete('/specification/{id}', [SpecificationController::class, 'destroy'])->name('specification.destroy');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
 });
 

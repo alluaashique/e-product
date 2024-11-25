@@ -20,7 +20,17 @@ return [
     'project_whatsapp' => env('PROJECT_WHATSAPP'),
     'project_vimeo' => env('PROJECT_VIMEO'),
     'project_location' => env('PROJECT_LOCATION'),
-    'project_map' => env('PROJECT_MAP')
+    'project_map' => env('PROJECT_MAP'),
+    'project_units' => array(
+        '1' => "Piece",
+        '2' => "Dozen",
+
+        '11' => "Gram",
+        '12' => "Kilo Gram",
+
+        '21' => "Milli Liter",
+        '22' => "Liter",
+    )
 
 ];
 
