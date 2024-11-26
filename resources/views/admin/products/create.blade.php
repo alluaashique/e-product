@@ -12,6 +12,11 @@
             Elements
         </h4> --}}
         @if(isset($product))
+        <a href="{{route('admin.product.specification.index',$product->id)}}">
+            <button type="submit" name="submit" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Manage Product</button>
+        </a>
+        @endif
+        @if(isset($product))
         <form id="myForm" method="POST" action="{{route('admin.product.update',$product->id)}}" enctype="multipart/form-data">
         @method("PUT")
         @else
@@ -99,7 +104,7 @@
                     <span class="text-gray-700 dark:text-gray-400">Description</span>
                     <textarea
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                        rows="3" name="description" rows="15" id="description" placeholder="Description">{{ old('description') ?? $product_category->description ?? "" }}</textarea>
+                        rows="3" name="description" rows="15" id="description" placeholder="Description">{{ old('description') ?? $product->description ?? "" }}</textarea>
                     @error('description')
                         <span class="text-xs text-red-600 dark:text-red-400"> {{ $message }} </span>                    
                     @enderror

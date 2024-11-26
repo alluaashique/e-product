@@ -89,6 +89,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
+    Route::get('/product/{id}/specification', [ProductController::class, 'specification'])->name('product.specification.index');
+    Route::post('/product/specification/getvalue', [ProductController::class, 'getvalue'])->name('product.specification.getvalue');
+    Route::post('/product/specification/store', [ProductController::class, 'storeSpecification'])->name('product.specification.store');
 });
 
 

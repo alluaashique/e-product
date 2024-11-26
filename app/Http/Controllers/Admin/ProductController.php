@@ -14,6 +14,10 @@ use App\Traits\UploadImageTrait;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\ProductCategory;
+use App\Models\Specification;
+use App\Models\Value;
+use App\Models\ProductSpecification;
+use App\Models\ProductSpecificationValue;
 
 
 // others
@@ -229,4 +233,95 @@ class ProductController extends Controller
             return 0;
         }
     }  
+    public function specification($id)
+    {
+        $data['product'] = Product::with('specification', 'specification.values')->findorfail($id);
+        $data['specifications'] = Specification::where('is_active', 1)->get();
+        $data['values'] = Value::where('is_active', 1)->get();
+        return view('admin.products.specification',$data);
+    }
+    public function getvalue(Request $request)
+    {
+        $request->validate([
+            'specification_id' => 'required|integer|exists:specifications,id',
+        ]);
+        $data['values'] = Value::where('specification_id', $request->specification_id)->where('is_active', 1)->get();
+        return response()->json($data);
+    }
+
+    
+    public function storeSpecification(Request $request)
+    {
+        $request->validate([
+            'specification_id' => 'required|integer|exists:specifications,id',
+            'product_id' => 'required|integer|exists:products,id',
+            'value_id' => 'required|array|min:1',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $product = Product::findorfail($request->product_id);
+
+            $spec = Specification::findorfail($request->specification_id);
+            $spec = $spec->specification;
+
+
+            $specification = ProductSpecification::where([
+                    'product_id' => $product->id,
+                    'specification_id' => $request->specification_id,
+                    'is_active' => 1
+                ])->first();
+            if(!$specification)
+                $specification = new ProductSpecification();
+            
+            // $specification->parent_id = null;
+            // $specification->product_value_id = null;
+            $specification->category_id = $product->category_id;
+            $specification->brand_id = $product->brand_id;
+            $specification->product_id = $product->id;
+            $specification->specification_id = $request->specification_id;
+            $specification->specification = $spec;
+            $specification->is_quantity = 0;
+            $specification->is_active = 1;
+            if($specification->save())
+            {
+                foreach($request->value_id as $val)
+                {
+                    $value = Value::find($val);
+                    if($value)
+                    {
+                        
+                        $specificationValue = ProductSpecificationValue::where([
+                                'product_id' => $product->id,
+                                'product_spec_id' => $request->specification_id,
+                                'value_id' => $val,
+                                'is_active' => 1
+                            ])->first();
+                        if(!$specificationValue)
+                            $specificationValue = new ProductSpecificationValue();
+                        
+                        // $specification->parent_id = null;
+                        $specificationValue->category_id = $product->category_id;
+                        $specificationValue->brand_id = $product->brand_id;
+                        $specificationValue->product_id = $product->id;
+                        $specificationValue->product_spec_id = $specification->id;
+                        $specificationValue->value_id = $val;
+                        $specificationValue->value = $value->value;
+                        $specificationValue->price = 0;
+                        $specificationValue->is_active = 1;
+                        $specificationValue->save(); 
+                    }
+                }   
+            }
+            DB::commit();
+            Toastr::success('Product specification added successfully.');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Toastr::error('Something went wrong.');
+            Log::error("ProductController::storeSpecification");
+            Log::error($e);
+            return redirect()->back();
+        }
+    }
 }

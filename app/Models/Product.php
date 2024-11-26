@@ -41,4 +41,13 @@ class Product extends Model
             $model->name = ucwords($model->name);
         });
     }
+
+    public function specification()
+    {
+        return $this->hasMany(ProductSpecification::class, 'product_id');
+    }
+    public function values()
+    {
+        return $this->belongsTo(ProductSpecificationValue::class, 'product_id');
+    }
 }

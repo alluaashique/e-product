@@ -20,7 +20,7 @@ class Specification extends Model
 
     public function values()
     {
-        return $this->hasMany(Value::class);
+        return $this->hasMany(Value::class, 'specification_id');
     }
    
     // protected static function boot()
