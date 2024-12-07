@@ -57,5 +57,25 @@ class ProductCategory extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'parent_id');
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class,'category_id');
+    }
+    public function activeProduct()
+    {
+        return $this->hasMany(Product::class, 'category_id')->where('is_active',1);
+    }
+    public function productCount()
+    {
+        return $this->hasMany(Product::class,'category_id')->count();
+    }
+    public function activeProductCount()
+    {
+        return $this->hasMany(Product::class, 'category_id')->where('is_active',1)->count();
+    }
+    
+
+    
     
 }

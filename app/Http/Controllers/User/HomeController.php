@@ -17,6 +17,9 @@ class HomeController extends Controller
     {
         $data["index"] = true;
         $data["productCategories"] = ProductCategory::where('is_active', 1)->orderBy('Name')->get();
+        $productController = new ProductController();
+        $data["getFreshOrganicProducts"] =  $productController->getFreshOrganicProducts(new Request)->getData();
+        $data['project_units'] = config('projectConfig.project_units');  
         
         return view('user.index', $data);
     }

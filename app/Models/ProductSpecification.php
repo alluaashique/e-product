@@ -21,6 +21,7 @@ class ProductSpecification extends Model
         'specification_id',
         'specification',
         'is_quantity',
+        'is_weight',
         'is_active'
     ];
    

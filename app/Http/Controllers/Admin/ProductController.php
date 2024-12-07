@@ -237,7 +237,8 @@ class ProductController extends Controller
     {
         $data['product'] = Product::with('specification', 'specification.values')->findorfail($id);
         $data['specifications'] = Specification::where('is_active', 1)->get();
-        $data['values'] = Value::where('is_active', 1)->get();
+        $data['values'] = Value::where('is_active', 1)->get();        
+        $data['project_units'] = config('projectConfig.project_units');  
         return view('admin.products.specification',$data);
     }
     public function getvalue(Request $request)
@@ -256,6 +257,7 @@ class ProductController extends Controller
             'specification_id' => 'required|integer|exists:specifications,id',
             'product_id' => 'required|integer|exists:products,id',
             'value_id' => 'required|array|min:1',
+            'price' => 'numeric',
         ]);
 
         DB::beginTransaction();
@@ -281,7 +283,8 @@ class ProductController extends Controller
             $specification->product_id = $product->id;
             $specification->specification_id = $request->specification_id;
             $specification->specification = $spec;
-            $specification->is_quantity = 0;
+            $specification->is_quantity = (int) $request->has('is_quantity');
+            $specification->is_weight = (int) $request->has('is_weight');
             $specification->is_active = 1;
             if($specification->save())
             {
@@ -307,7 +310,7 @@ class ProductController extends Controller
                         $specificationValue->product_spec_id = $specification->id;
                         $specificationValue->value_id = $val;
                         $specificationValue->value = $value->value;
-                        $specificationValue->price = 0;
+                        $specificationValue->price = $request->price;
                         $specificationValue->is_active = 1;
                         $specificationValue->save(); 
                     }

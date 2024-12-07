@@ -17,11 +17,11 @@
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active rounded">
-                            <img src="{{ asset('user_assets/img/hero-img-1.png') }}" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                            <img data-url="{{ asset('user_assets/img/hero-img-1.png') }}" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                             <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
                         </div>
                         <div class="carousel-item rounded">
-                            <img src="{{ asset('user_assets/img/hero-img-2.jpg') }}" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                            <img data-url="{{ asset('user_assets/img/hero-img-2.jpg') }}" class="img-fluid w-100 h-100 rounded" alt="Second slide">
                             <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-secondary rounded border border-secondary">
-                        <img src="{{ asset('user_assets/img/featur-1.jpg') }}" class="img-fluid rounded-top w-100" alt="">
+                        <img data-url="{{ asset('user_assets/img/featur-1.jpg') }}" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-primary text-center p-4 rounded">
                                 <h5 class="text-white">Fresh Apples</h5>
@@ -167,7 +167,7 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-dark rounded border border-dark">
-                        <img src="{{ asset('user_assets/img/featur-2.jpg') }}" class="img-fluid rounded-top w-100" alt="">
+                        <img data-url="{{ asset('user_assets/img/featur-2.jpg') }}" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-light text-center p-4 rounded">
                                 <h5 class="text-primary">Tasty Fruits</h5>
@@ -180,7 +180,7 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-primary rounded border border-primary">
-                        <img src="{{ asset('user_assets/img/featur-3.jpg') }}" class="img-fluid rounded-top w-100" alt="">
+                        <img data-url="{{ asset('user_assets/img/featur-3.jpg') }}" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-secondary text-center p-4 rounded">
                                 <h5 class="text-white">Exotic Vegitable</h5>
@@ -201,9 +201,26 @@
     <div class="container py-5">
         <h1 class="mb-0">Fresh Organic Vegetables</h1>
         <div class="owl-carousel vegetable-carousel justify-content-center">
+            @foreach($getFreshOrganicProducts as $product)
+                <div class="border border-primary rounded position-relative vesitable-item">
+                    <div class="vesitable-img">
+                        <img data-url="{{ asset('storage/'.$product->image) }}" class="img-fluid w-100 rounded-top load-images" alt="">
+                    </div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">{{ $product->category->name }}</div>                          
+
+                    <div class="p-4 rounded-bottom">
+                        <h4>{{ $product->name }}</h4>
+                        <p>{{ $product->description }}</p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                            <p class="text-dark fs-5 fw-bold mb-0">{{ $product->price }}* / {{ $project_units[$product->unit] }}</p>
+                            <a href="{{route('product.show',$product->uuid)}}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
             {{-- <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -217,7 +234,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-1.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-1.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -231,7 +248,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-3.png') }}" class="img-fluid w-100 rounded-top bg-light" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-3.png') }}" class="img-fluid w-100 rounded-top bg-light" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -245,7 +262,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-4.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-4.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -259,7 +276,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-5.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-5.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -273,7 +290,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -287,7 +304,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-5.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-5.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -301,7 +318,7 @@
             </div>
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('user_assets/img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
+                    <img data-url="{{ asset('user_assets/img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top" alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                 <div class="p-4 rounded-bottom">
@@ -333,7 +350,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="position-relative">
-                    <img src="{{ asset('user_assets/img/baner-1.png') }}" class="img-fluid w-100 rounded" alt="">
+                    <img data-url="{{ asset('user_assets/img/baner-1.png') }}" class="img-fluid w-100 rounded" alt="">
                     <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
                         <h1 style="font-size: 100px;">1</h1>
                         <div class="d-flex flex-column">
@@ -361,7 +378,7 @@
                 <div class="p-4 rounded bg-light">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <img src="{{ asset('user_assets/img/best-product-1.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
+                            <img data-url="{{ asset('user_assets/img/best-product-1.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
                         </div>
                         <div class="col-6">
                             <a href="#" class="h5">Organic Tomato</a>
@@ -382,7 +399,7 @@
                 <div class="p-4 rounded bg-light">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <img src="{{ asset('user_assets/img/best-product-2.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
+                            <img data-url="{{ asset('user_assets/img/best-product-2.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
                         </div>
                         <div class="col-6">
                             <a href="#" class="h5">Organic Tomato</a>
@@ -403,7 +420,7 @@
                 <div class="p-4 rounded bg-light">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <img src="{{ asset('user_assets/img/best-product-3.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
+                            <img data-url="{{ asset('user_assets/img/best-product-3.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
                         </div>
                         <div class="col-6">
                             <a href="#" class="h5">Organic Tomato</a>
@@ -424,7 +441,7 @@
                 <div class="p-4 rounded bg-light">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <img src="{{ asset('user_assets/img/best-product-4.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
+                            <img data-url="{{ asset('user_assets/img/best-product-4.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
                         </div>
                         <div class="col-6">
                             <a href="#" class="h5">Organic Tomato</a>
@@ -445,7 +462,7 @@
                 <div class="p-4 rounded bg-light">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <img src="{{ asset('user_assets/img/best-product-5.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
+                            <img data-url="{{ asset('user_assets/img/best-product-5.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
                         </div>
                         <div class="col-6">
                             <a href="#" class="h5">Organic Tomato</a>
@@ -466,7 +483,7 @@
                 <div class="p-4 rounded bg-light">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <img src="{{ asset('user_assets/img/best-product-6.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
+                            <img data-url="{{ asset('user_assets/img/best-product-6.jpg') }}" class="img-fluid rounded-circle w-100" alt="">
                         </div>
                         <div class="col-6">
                             <a href="#" class="h5">Organic Tomato</a>
@@ -485,7 +502,7 @@
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="text-center">
-                    <img src="{{ asset('user_assets/img/fruite-item-1.jpg') }}" class="img-fluid rounded" alt="">
+                    <img data-url="{{ asset('user_assets/img/fruite-item-1.jpg') }}" class="img-fluid rounded" alt="">
                     <div class="py-4">
                         <a href="#" class="h5">Organic Tomato</a>
                         <div class="d-flex my-3 justify-content-center">
@@ -502,7 +519,7 @@
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="text-center">
-                    <img src="{{ asset('user_assets/img/fruite-item-2.jpg') }}" class="img-fluid rounded" alt="">
+                    <img data-url="{{ asset('user_assets/img/fruite-item-2.jpg') }}" class="img-fluid rounded" alt="">
                     <div class="py-4">
                         <a href="#" class="h5">Organic Tomato</a>
                         <div class="d-flex my-3 justify-content-center">
@@ -519,7 +536,7 @@
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="text-center">
-                    <img src="{{ asset('user_assets/img/fruite-item-3.jpg') }}" class="img-fluid rounded" alt="">
+                    <img data-url="{{ asset('user_assets/img/fruite-item-3.jpg') }}" class="img-fluid rounded" alt="">
                     <div class="py-4">
                         <a href="#" class="h5">Organic Tomato</a>
                         <div class="d-flex my-3 justify-content-center">
@@ -536,7 +553,7 @@
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="text-center">
-                    <img src="{{ asset('user_assets/img/fruite-item-4.jpg') }}" class="img-fluid rounded" alt="">
+                    <img data-url="{{ asset('user_assets/img/fruite-item-4.jpg') }}" class="img-fluid rounded" alt="">
                     <div class="py-2">
                         <a href="#" class="h5">Organic Tomato</a>
                         <div class="d-flex my-3 justify-content-center">
@@ -614,7 +631,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="{{ asset('user_assets/img/testimonial-1.jpg') }}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                            <img data-url="{{ asset('user_assets/img/testimonial-1.jpg') }}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -639,7 +656,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="{{ asset('user_assets/img/testimonial-1.jpg') }}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                            <img data-url="{{ asset('user_assets/img/testimonial-1.jpg') }}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -664,7 +681,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="{{ asset('user_assets/img/testimonial-1.jpg') }}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                            <img data-url="{{ asset('user_assets/img/testimonial-1.jpg') }}" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -695,6 +712,13 @@
             }
         });
 
+        function loadImages() {
+            $('img').each(function(index, element) {
+                var newSource = $(this).data('url');
+                $(this).attr('src', newSource);
+            });
+        }
+        loadImages();
 
         function getProducts(category) {
             $.ajax({
@@ -729,7 +753,7 @@
                             html += '<p> ' + response[i].description + '</p>';
                             html += '<div class="d-flex justify-content-between flex-lg-wrap">';                            
                             html += '<p class="text-dark fs-5 fw-bold mb-0">' + response[i].price + '</p>';
-                            html += '<a href="' + productShowBaseUrl + '/' + response[i].id + '" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>';
+                            html += '<a href="' + productShowBaseUrl + '/' + response[i].uuid + '" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>';
                             html += '</div>';
                             html += '</div>';
                             html += '</div>';
@@ -795,7 +819,7 @@
                 }
             });
         }
-        getFreshOrganicProducts(null);
+        // getFreshOrganicProducts(null);
 
 
         // $('#ajaxButton').click(function () {

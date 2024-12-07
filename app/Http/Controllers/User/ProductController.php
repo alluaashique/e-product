@@ -50,5 +50,32 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    public function show(string $id)
+    { 
+        $data['product'] = Product::with('category', 'brand','specification', 'specification.values')
+                ->where('is_active', 1)
+                ->where('uuid', $id)
+                ->firstOrfail();
+        $data['related_products'] = Product::with('category')
+                ->where('category_id', $data['product']->category_id)
+                ->where('is_active', 1)
+                ->limit(8)
+                ->latest()
+                ->get();
+        $data['featured_products'] = Product::with('category')
+                ->where('category_id', $data['product']->category_id)
+                ->where('is_active', 1)
+                ->limit(8)
+                ->latest()
+                ->get();
+        $data['categories'] = ProductCategory::where('is_active', 1)
+                ->orderBy('name')
+                ->get();
+        $data['project_units'] = config('projectConfig.project_units'); 
+                
+        return view('user.product.show', $data);
+
+    }
+
     
 }
