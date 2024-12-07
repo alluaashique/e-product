@@ -50,4 +50,12 @@ class Product extends Model
     {
         return $this->belongsTo(ProductSpecificationValue::class, 'product_id');
     }
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class, 'category_id');
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
 }

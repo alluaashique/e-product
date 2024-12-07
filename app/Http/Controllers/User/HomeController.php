@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\ProductCategory;
+
+
 class HomeController extends Controller
 {
     /**
@@ -13,6 +16,8 @@ class HomeController extends Controller
     public function index()
     {
         $data["index"] = true;
+        $data["productCategories"] = ProductCategory::where('is_active', 1)->orderBy('Name')->get();
+        
         return view('user.index', $data);
     }
     public function about()

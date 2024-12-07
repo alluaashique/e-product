@@ -1,21 +1,17 @@
 
 @extends('user.layout.app')
 @section('content')
-<div class="inner-banner">
-    <section class="w3l-breadcrumb py-5">
-        <div class="container py-lg-5 py-md-3">
-            <h2 class="title">Single post</h2>
-        </div>
-    </section>
+  <!-- Single Page Header start -->
+  <div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Shop</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Shop</li>
+    </ol>
 </div>
-<!-- banner bottom shape -->
-<div class="position-relative">
-    <div class="shape overflow-hidden">
-        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
-        </svg>
-    </div>
-</div>
+<!-- Single Page Header End -->
+
 <!-- banner bottom shape -->
 <div class="py-md-5 pt-5 pb-4 w3l-singleblock1">
     <div class="container mt-md-3">
@@ -122,7 +118,7 @@
                         @foreach ($blogComments as $comment)
                             <div class="media">
                                 <div class="img-circle">
-                                    <img src="{{ asset("user_assets/images/user-icon.png") }}" class="img-fluid" alt="user-icon">
+                                    <img src="{{ asset("user_assets/img/user-icon.png") }}" class="img-fluid" alt="user-icon">
                                 </div>
                                 <div class="media-body">
                                     <ul class="time-rply mb-2">
@@ -175,28 +171,34 @@
                     @endif
 
                 <div class="leave-comment-form mt-5 pt-lg-4" id="reply">
-                    <h4 class="side-title mb-2">Leave a reply</h4>
-                    <p class="mb-4">Your email address will not be published. Required fields are marked *
-                    </p>
                     <form action="{{route('blog.comment.store',Crypt::encrypt($blog->id))}}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <textarea name="comment" class="form-control" placeholder="Your Comment*" required spellcheck="false">{{old('comment')}}</textarea>
-                        </div>
-                        <div class="input-grids row">
-
-                            <div class="form-group col-lg-6">
-                                <input type="text" name="name" class="form-control"
-                                    placeholder="Your Name*" required>
+                        <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                        <p class="mb-4">Your email address will not be published. Required fields are marked *
+                        </p>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input type="text" name="name" required class="form-control border-0 me-4" placeholder="Your Name *">
+                                </div>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <input type="email" name="email" class="form-control" placeholder="Email*"
-                                    required>
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input type="email" name="email" class="form-control border-0" placeholder="Your Email *" required>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="submit text-right">
-                            <button type="submit" class="btn btn-style btn-primary">Post Comment </button>
+                            <div class="col-lg-12">
+                                <div class="border-bottom rounded my-4">
+                                    <textarea name="comment" id="comment" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false">{{old('comment')}}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex justify-content-between py-3 mb-5">
+                                    <div class="d-flex align-items-center">
+                                    </div>
+                                    <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

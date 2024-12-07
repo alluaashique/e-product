@@ -1,20 +1,17 @@
 @extends('user.layout.app')
 @section('content')
-    <div class="inner-banner">
-        <section class="w3l-breadcrumb py-5">
-            <div class="container py-lg-5 py-md-3">
-                <h2 class="title">Latest Updates</h2>
-            </div>
-        </section>
-    </div>
-    <!-- banner bottom shape -->
-    <div class="position-relative">
-        <div class="shape overflow-hidden">
-            <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
-            </svg>
+    
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Shop</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-white">Shop</li>
+            </ol>
         </div>
-    </div>
+        <!-- Single Page Header End -->
+  
     <!-- banner bottom shape -->
     <section class="w3l-blogblock py-5">
         <div class="container pt-lg-4 pt-md-3">

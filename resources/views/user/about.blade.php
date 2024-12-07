@@ -1,37 +1,29 @@
 @extends('user.layout.app')
 @section('content')
-    <div class="inner-banner">
-        <section class="w3l-breadcrumb py-5">
-            <div class="container py-lg-5 py-md-3">
-                <h2 class="title">About Us</h2>
-            </div>
-        </section>
-    </div>
-    <!-- banner bottom shape -->
-    <div class="position-relative">
-        <div class="shape overflow-hidden">
-            <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
-            </svg>
-        </div>
-    </div>
+     <!-- Single Page Header start -->
+  <div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">About</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
+        <li class="breadcrumb-item active text-white">About</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
     <!-- banner bottom shape -->
     <section class="w3l-aboutblock1 py-5" id="about">
         <div class="container py-lg-5 py-md-3">
             <div class="row">
                 <div class="col-lg-6">
-                    <h5 class="title-small">A little about Us</h5>
-                    <h3 class="title-big">Welcome to Anandatheeram Charitable Society</h3>
-                    <p class="mt-3">Anandatheeram Charitable Society, based in Kollam, Kerala, is dedicated to improving
-                        the lives of underprivileged individuals and communities.</p>
-                    <p class="mt-3">
-                        Focused on various social issues, the society aims to provide education, healthcare, and support
-                        services to those in need.</p>
-                    <h3 class="title mt-4">"Over 20 Years of Accomplishments”</h3>
-                    <a href="#MoreAboutUs" class="btn btn-primary btn-style mt-lg-5 mt-4">Learn More about Us</a>
+                    <h5 class="title-small">PRIDHWI at a glance……</h5>
+                    <h3 class="title-big"> Primary objective</h3>
+                    <p class="mt-3">Pridhwi Farmer Producer company is formed under the 10000 FPO scheme promoted by the Government of India under the National Dairy Development Board (NDDB) which is the implementing agency and CISSA is the cluster-based business support organization. Pridhwi is categorized as a Fodder plus FPC which is one of the five FPC’s under the NDDB.</p>
+                    <p class="mt-3">Pridhwi FPC was incorporated on 10/04/2023 under the Indian Companies Act and its office is at Puthethu, near Sreenarayanapuram Mahavishnu temple, East Kallada, Kollam- 691502. It is a district-based Fodder FPC.</p>
+                    <p class="mt-3">Pridhwi FPC has, at present 310 member shareholders and 10 Board of Directors in the first FY 2023-24. Pridhwi FPC is expanding rapidly by adding more shareholders from Kollam District. It has an authorized capital of Rs 50,00,000/-.</p>
+                    <p class="mt-3">Sri Kallada Ramesh is the Chairman of Pridhwi FPC and has 10 eminent and proven directors who are pioneers in the fields of Agriculture, Dairy farming, and Pisciculture.</p>
+                    <p class="mt-3">Sri G Hariharan is the Chief Executive Officer and Sri Nirmal K Mohan is the accountant.</p>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5">
-                    <img src="{{ asset('user_assets/images/about.jpg') }}" alt="" class="radius-image img-fluid">
+                    <img src="{{ asset('user_assets/img/team1.jpg') }}" alt="about" class="radius-image img-fluid">
                 </div>
             </div>
         </div>
@@ -41,68 +33,54 @@
         <div class="main-w3 py-lg-5 py-md-3">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="main-midd col-lg-9">
-                        <h3 class="title-big">Facts about Anandatheeram Charitable Society</h3>
-                        <p class="mt-3">Through various programs and initiatives, Anandatheeram strives to empower
-                            marginalized groups, foster community development, and promote social welfare. The society
-                            invites volunteers and donors to join its mission in making a meaningful impact on the lives of
-                            the less fortunate.</p>
-                    </div>
-                    <div class="main-midd-2 col-lg-3 mt-lg-0 mt-4 text-lg-right">
-                        <a class="btn btn-style btn-primary" href="donate.html"><span class="fa fa-heart mr-1"></span>
-                            Donate
-                            Now </a>
-                    </div>
-                </div>
-
-                <div class="donar-img mt-5">
-                    <div class="right-side text-center">
-                        <span class="fa fa-heart"></span>
-                        <p>OUR TOP DONAR</p>
-                        <h3 class="big my-3">$1.6m</h3>
-                        <a class="btn btn-text" href="#ViewMore">View More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- //forms -->
-    <section class="w3l-aboutblock3 py-5" id="videos">
-        <div class="video-recipe py-lg-5 py-md-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 align-self">
-                        <h3 class="title-big">Empowering the Poor to Face the Future with Pride</h3>
+                    <div class="main-midd col-lg-12">
+                        <h3 class="title-big">Primary objective</h3>          
                         <p class="mt-4">
-                            At Anandatheeram Charitable Society, we believe in the dignity and potential of every
-                            individual. Our mission is to empower the poor, helping them to rise above their circumstances
-                            and face the future with pride. Through education, healthcare, and support services, we provide
-                            the tools and resources needed for self-sufficiency and resilience. Together, we can uplift
-                            lives and foster a community where everyone can stand tall and embrace their future with
-                            confidence. Join us in this journey of transformation!
-
+                                The primary objective of the formation of Pridhwi FPC is to promote and safeguard the interest of the farmers, especially Dairy farmers in the district of Kollam, by providing quality and economical farmer inputs like Straw, Silage, Cattle feed, Mineral mixture, feed supplements and to conduct the trading of Millets and Coconut based products under its brand name, thereby monetizing its shareholders.
+                        </p>
+                        <p class="mt-4">
+                            It also helps its shareholders establish various small- and medium-scale enterprises and startups with the support of both the central and State governments including financial, and technical support.
                         </p>
                     </div>
-                    <div class="col-lg-7 mt-lg-0 mt-md-5 mt-4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <iframe src="https://www.youtube.com/embed/MG3jGHnBVQs" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                                <h3 class="video-title mt-sm-4 mt-3">The man of the poor.</h3>
-                            </div>
-                            <div class="col-md-6 mt-md-0 mt-5">
-                                <iframe src="https://www.youtube.com/embed/MG3jGHnBVQs" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                                <h3 class="video-title mt-sm-4 mt-3">Mission of “garbage people”</h3>
-                            </div>
-                        </div>
+                    <div class="main-midd col-lg-12">
+                        <h3 class="title-big">Operations</h3>          
+                        <p class="mt-4">
+                            Pridhwi has obtained all mandatory licenses like FSSAI, GST, UDYAM,
+                            E- nam etc. to conduct business, especially food-oriented business activities.
+                        </p>
+                        <p class="mt-4">
+                            It started its operations by selling baled straws from Kuttanad to primary cooperative societies in the district. The first sales of Pridhwi were conducted in the last week of March 2024 by selling straws to Thodiyoor Milk Society, Karunagappally. We have sold 22 Mt of Baled straw so far.
+                        </p>
+                        <p class="mt-4">
+                            Pridhwi will be putting into market millet-based natural products, including both ready-to-eat and non-ready-to-eat products. Also, high-quality, Coconut products made through the state-of-the-art manufacturing facilities from the sophisticated manufacturing plants of Kerala, under our brand name will also be ready by December midst, 2024.
+                        </p>
+                        <p class="mt-4">
+                            We have just test-marketed certain products as shown above and the results are awesome. This propels us to introduce these products to the open market in the coming months.
+                        </p>
                     </div>
-                </div>
+                    <div class="main-midd col-lg-12">
+                        <h3 class="title-big">Future plans</h3>          
+                        <p class="mt-4">
+                            Our plans include 
+                        </p>
+                        <p class="mt-4">
+                            producing and marketing the Pridhwi brand Cattle feed, from our hired production centres in Tamilnadu.
+                        </p>
+                        <p class="mt-4">
+                            Launching more natural edible and ready-to-cook products to market under the Pridhwi brand name.
+                        </p>
+                        <p class="mt-4">
+                            Marketing of Silage, green fodder, etc in the coming months.
+                        </p>
+                        <p class="mt-4">
+                            Creating startups and entrepreneurial avenues among our shareholders.
+                        </p>
+                    </div>
+                </div>               
             </div>
         </div>
     </section>
+    <!-- //forms -->   
     <!--/team-sec-->
     <section class="w3l-team-main" id="team">
         <div class="team py-5">
@@ -114,7 +92,7 @@
                     <div class="team-wrap">
                         <div class="team-member text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team1.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team1.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Luke jacobs</a>
                             <p>Volunteers</p>
@@ -125,7 +103,7 @@
                     <div class="team-wrap">
                         <div class="team-member text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team2.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team2.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Claire olson</a>
                             <p>Volunteers</p>
@@ -136,7 +114,7 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team3.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team3.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Phillip hunt</a>
                             <p>Volunteers</p>
@@ -147,7 +125,7 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team4.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team4.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Sara grant</a>
                             <p>Volunteers</p>
@@ -158,7 +136,7 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team5.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team5.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Sara grant</a>
                             <p>Volunteers</p>
@@ -169,7 +147,7 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team6.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team6.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Sara grant</a>
                             <p>Volunteers</p>
@@ -180,7 +158,7 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team7.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team7.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Sara grant</a>
                             <p>Volunteers</p>
@@ -191,7 +169,7 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team8.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team8.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Sara grant</a>
                             <p>Volunteers</p>
@@ -202,160 +180,15 @@
                     <div class="team-wrap">
                         <div class="team-member last text-center">
                             <div class="team-img">
-                                <img src="{{ asset('user_assets/images/team9.jpg') }}" alt="" class="radius-image img-fluid">
+                                <img src="{{ asset('user_assets/img/team9.jpg') }}" alt="" class="radius-image img-fluid">
                             </div>
                             <a href="#url" class="team-title">Sara grant</a>
                             <p>Volunteers</p>
                         </div>
                     </div>
                     <!-- end team member -->
-
-                    <div class="team-apply">
-                        <a href="#url" class="team-title m-0"><span class="fa fa-plus-circle d-block mb-3"></span>
-                            Apply for Volunteer</a>
-                    </div>
-
                 </div>
             </div>
     </section>
-    <!--//team-sec-->
-    <!-- testimonials -->
-    <section class="w3l-testimonials" id="testimonials">
-        <!-- /grids -->
-        <div class="customer-layout py-5">
-            <div class="container py-lg-5 py-md-4">
-                <div class="heading align-self text-center">
-                    <h6 class="title-small">Our Testimonials</h6>
-                    <h3 class="title-big mb-md-5 mb-4">Over 20 Years of Accomplishments</h3>
-                </div>
-                <!-- /grids -->
-                <div class="row testimonial-row">
-                    <div id="owl-demo1" class="owl-two owl-carousel owl-theme mb-lg-3 mb-5">
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q>One of the best rehabilitation centre in kollam for differentially abled
-                                            children.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="{{ asset('user_assets/images/team1.jpg') }}" class="img-fluid"
-                                                alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Ameera</h3>
-                                            <p class="indentity">Donor </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q>Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus est quasi, doloribus tempora.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="{{ asset('user_assets/images/team2.jpg') }}" class="img-fluid"
-                                                alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Elaine F. Marshall</h3>
-                                            <p class="indentity">Secretary of State </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q>Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus est quasi, doloribus tempora.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="{{ asset('user_assets/images/team3.jpg') }}" class="img-fluid"
-                                                alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Janice Hoffman</h3>
-                                            <p class="indentity">Chief Operating Officer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q>Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus est quasi, doloribus tempora.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="{{ asset('user_assets/images/team4.jpg') }}" class="img-fluid"
-                                                alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Stefan Homa</h3>
-                                            <p class="indentity">Charity architect</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q>Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus est quasi, doloribus tempora.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="{{ asset('user_assets/images/team2.jpg') }}" class="img-fluid"
-                                                alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Jeannie Gooch</h3>
-                                            <p class="indentity">Funding teacher</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q>Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus est quasi, doloribus tempora.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="{{ asset('user_assets/images/team3.jpg') }}" class="img-fluid"
-                                                alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Elaine F. Marshall</h3>
-                                            <p class="indentity">Secretary of State</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /grids -->
-        </div>
-        <!-- //grids -->
-    </section>
-    <!-- //testimonials -->
+    <!--//team-sec-->  
 @endsection

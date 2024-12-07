@@ -1,31 +1,32 @@
 @extends('user.layout.app')
 @section('content')
-    <div class="inner-banner">
-        <section class="w3l-breadcrumb py-5">
-            <div class="container py-lg-5 py-md-3">
+    {{-- 
+    <!-- Single Page Header start -->
+    <div class="container-fluid page-header py-5">
+        <h1 class="text-center text-white display-6">404 Error</h1>
+        <ol class="breadcrumb justify-content-center mb-0">
+            <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active text-white">404</li>
+        </ol>
+    </div> 
+    <!-- Single Page Header End -->
+    --}}
+
+    <!-- 404 Start -->
+    <div class="container-fluid page-header py-5">
+        <div class="container py-5 text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <i class="bi bi-exclamation-triangle display-1 text-secondary"></i>
+                    <h1 class="display-1">404</h1>
+                    <h1 class="mb-4">Page Not Found</h1>
+                    <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to
+                        our home page or try to use a search?</p>
+                    <a class="btn border-secondary rounded-pill py-3 px-5" href="{{ route('index') }}">Go Back To Home</a>
+                </div>
             </div>
-        </section>
-    </div>
-    <!-- banner bottom shape -->
-    <div class="position-relative">
-        <div class="shape overflow-hidden">
-            <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
-            </svg>
         </div>
     </div>
-    <!-- banner bottom shape -->
-    <!-- error section -->
-    <section id="error" class="w3l-error py-5 text-center">
-        <div class="container py-lg-4 py-md-3">
-            <div class="error-grid">
-                <h1 class="error-title">4<span class="fa fa-heart-o"></span>4</h1>
-                <h2>Page Not Found</h2>
-                <p class="mt-4">Sorry, we're offline right now to make our site even better. Please, come back later and
-                    check what we've been up to.
-                </p>
-                <a href="{{ route('index') }}" class="btn btn-style btn-outline-primary mt-md-5 mt-4"> Back to home</a>
-            </div>
-        </div>
-    </section>
+    <!-- 404 End -->
 @endsection

@@ -19,6 +19,10 @@ use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\ContactusController as UserContactusController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 
+use App\Http\Controllers\User\ProductController as UserProductController;
+
+
+
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -99,6 +103,16 @@ Route::get('/', [UserHomeController::class, 'index'])->name('index');
 Route::get('/about', [UserHomeController::class, 'about'])->name('about');
 Route::get('/causes', [UserHomeController::class, 'causes'])->name('causes');
 Route::get('/donate', [UserHomeController::class, 'donate'])->name('donate');
+
+
+Route::get('/get-product-with-category', [UserProductController::class, 'getProductWithCategory'])->name('getProductWithCategory');
+Route::get('/get-products', [UserProductController::class, 'getProduct'])->name('getProduct');
+Route::get('/get-fresh-organic-products', [UserProductController::class, 'getFreshOrganicProducts'])->name('getFreshOrganicProducts');
+Route::get('/product/{product}', [UserProductController::class, 'show'])->name('product.show');
+
+
+
+
 
 Route::get('/blog', [UserBlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{blog}', [UserBlogController::class, 'show'])->name('blog.show');
