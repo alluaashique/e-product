@@ -3,11 +3,10 @@
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">Shop Detail</h1>
+            <h1 class="text-center text-white display-6">Product</h1>
             <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-white">Shop Detail</li>
+                <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
+                <li class="breadcrumb-item active text-white">Product</li>
             </ol>
         </div>
         <!-- Single Page Header End -->
@@ -91,42 +90,25 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                        <div class="d-flex">
-                                            <img data-url="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>Jason Smith</h5>
-                                                    <div class="d-flex mb-3">
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <img data-url="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>Sam Peters</h5>
-                                                    <div class="d-flex mb-3">
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
+                                        @foreach ($productReviews as $review) 
+                                         <div class="d-flex">
+                                             <img data-url="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                             <div class="">
+                                                 <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                                                 <div class="d-flex justify-content-between">
+                                                     <h5>{{$review->name}}</h5>
+                                                     <div class="d-flex mb-3">
+                                                         <i class="fa fa-star text-secondary"></i>
+                                                         <i class="fa fa-star text-secondary"></i>
+                                                         <i class="fa fa-star text-secondary"></i>
+                                                         <i class="fa fa-star text-secondary"></i>
+                                                         <i class="fa fa-star"></i>
+                                                     </div>
+                                                 </div>
+                                                 <p>{{$review->review}} </p>
+                                             </div>
+                                         </div>
+                                        @endforeach
                                     </div>
                                     <div class="tab-pane" id="nav-vision" role="tabpanel">
                                         <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
@@ -136,27 +118,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="#">
+                            <form action="{{route('product_review.store')}}" method="POST">
+                                @csrf
                                 <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="border-bottom rounded">
-                                            <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
+                                            <input type="hidden" name="product_uuid" value="{{$product->uuid}}" required>
+                                            <input type="text" class="form-control border-0 me-4" placeholder="Your Name *" name="name" value="{{old("name")}}" required>
+                                            @error("name") {{$message}} @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="border-bottom rounded">
-                                            <input type="email" class="form-control border-0" placeholder="Your Email *">
+                                            <input type="email" class="form-control border-0" placeholder="Your Email *" name="email" value="{{old("email")}}" required>
+                                            @error("email") {{$message}} @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="border-bottom rounded my-4">
-                                            <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                            <textarea name="review" id="review" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false">{{old("review")}}</textarea>
+                                            @error("review") {{$message}} @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="d-flex justify-content-between py-3 mb-5">
                                             <div class="d-flex align-items-center">
+                                                {{--
                                                 <p class="mb-0 me-3">Please rate:</p>
                                                 <div class="d-flex align-items-center" style="font-size: 12px;">
                                                     <i class="fa fa-star text-muted"></i>
@@ -165,8 +153,10 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
+                                                --}}
                                             </div>
-                                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
+                                            <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Post Comment</button>
+                                            {{-- <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a> --}}
                                         </div>
                                     </div>
                                 </div>

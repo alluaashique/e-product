@@ -29,18 +29,6 @@ class HomeController extends Controller
         $data["about"] = true;
         return view('user.about', $data);
     }
-    public function causes()
-    {
-        $data["causes"] = true;
-        return view('user.causes', $data);
-    }
-    
-    public function donate()
-    {
-        $data["donate"] = true;
-        return view('user.donate', $data);
-    }
-    
     /**
      * Show the form for creating a new resource.
      */

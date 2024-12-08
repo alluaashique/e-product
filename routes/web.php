@@ -20,6 +20,7 @@ use App\Http\Controllers\User\ContactusController as UserContactusController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 
 use App\Http\Controllers\User\ProductController as UserProductController;
+use App\Http\Controllers\User\ProductReviewController as UserProductReviewController;
 
 
 
@@ -103,8 +104,6 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
 Route::get('/', [UserHomeController::class, 'index'])->name('index');
 Route::get('/about', [UserHomeController::class, 'about'])->name('about');
-Route::get('/causes', [UserHomeController::class, 'causes'])->name('causes');
-Route::get('/donate', [UserHomeController::class, 'donate'])->name('donate');
 
 
 Route::get('/get-product-with-category', [UserProductController::class, 'getProductWithCategory'])->name('getProductWithCategory');
@@ -115,6 +114,7 @@ Route::get('/get-fresh-organic-products', [UserProductController::class, 'getFre
 Route::get('/product', [UserProductController::class, 'index'])->name('product.index');
 Route::get('/product/{product}', [UserProductController::class, 'show'])->name('product.show');
 
+Route::post('/product_review', [UserProductReviewController::class, 'store'])->name('product_review.store');
 
 
 

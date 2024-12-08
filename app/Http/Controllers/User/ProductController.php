@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\ProductReview;
 
 
 
@@ -58,17 +59,8 @@ class ProductController extends Controller
                 ->where('is_active', 1)
                 ->limit(8)
                 ->latest()
-                ->get();                        
+                ->get();               
         return view('user.product.product', $data);
-        $data['related_products'] = Product::with('category')
-                ->where('category_id', $data['product']->category_id)
-                ->where('is_active', 1)
-                ->limit(8)
-                ->latest()
-                ->get();
-        $data['project_units'] = config('projectConfig.project_units'); 
-                
-        return view('user.product.show', $data);
 
     }
     //getProductWithCategory
@@ -138,7 +130,10 @@ class ProductController extends Controller
         $data['categories'] = ProductCategory::where('is_active', 1)
                 ->orderBy('name')
                 ->get();
-        $data['project_units'] = config('projectConfig.project_units'); 
+        $data['project_units'] = config('projectConfig.project_units');
+        $data['productReviews'] = ProductReview::where('is_active', 1)
+                ->latest()
+                ->get();  
                 
         return view('user.product.show', $data);
 
