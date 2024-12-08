@@ -179,5 +179,5 @@ class ProductCategoryController extends Controller
             Log::error($e);
             return 0;
         }
-    }  
+    }
 }

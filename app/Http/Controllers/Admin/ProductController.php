@@ -327,4 +327,23 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
+    public function specificationValueDestroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            $productSpecificationValue = ProductSpecificationValue::findorfail($id);
+            // $isBlogExists = Blog::where('blog_category_id', $id)->exists();
+            // if ($isBlogExists) {
+            //     return 2;
+            // }
+            $productSpecificationValue->delete();
+            DB::commit();
+            return 1;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("ProductController::specificationValueDestroy");
+            Log::error($e);
+            return 0;
+        }
+    } 
 }

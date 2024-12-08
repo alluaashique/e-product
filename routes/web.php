@@ -96,6 +96,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('/product/{id}/specification', [ProductController::class, 'specification'])->name('product.specification.index');
     Route::post('/product/specification/getvalue', [ProductController::class, 'getvalue'])->name('product.specification.getvalue');
     Route::post('/product/specification/store', [ProductController::class, 'storeSpecification'])->name('product.specification.store');
+    Route::delete('/product/specification/{id}', [ProductController::class, 'specificationValueDestroy'])->name('product.specification.destroy');
+
 });
 
 
@@ -108,6 +110,9 @@ Route::get('/donate', [UserHomeController::class, 'donate'])->name('donate');
 Route::get('/get-product-with-category', [UserProductController::class, 'getProductWithCategory'])->name('getProductWithCategory');
 Route::get('/get-products', [UserProductController::class, 'getProduct'])->name('getProduct');
 Route::get('/get-fresh-organic-products', [UserProductController::class, 'getFreshOrganicProducts'])->name('getFreshOrganicProducts');
+
+
+Route::get('/product', [UserProductController::class, 'index'])->name('product.index');
 Route::get('/product/{product}', [UserProductController::class, 'show'])->name('product.show');
 
 

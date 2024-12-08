@@ -26,7 +26,7 @@
             @endif
         @endforeach
         @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}" class="rounded">6</a>
+            <a href="{{ $paginator->nextPageUrl() }}" class="rounded">&raquo;</a>
         @else
             <a href="javascript:void(0)" class="rounded">&raquo;</a>
         @endif

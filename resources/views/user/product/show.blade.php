@@ -21,7 +21,7 @@
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="border rounded">
-                                    <a href="#">
+                                    <a href="javascript:void(0);">
                                         <img data-url="{{ asset('storage/'.$product->image) }}" class="img-fluid rounded" alt="Image">
                                     </a>
                                 </div>
@@ -52,7 +52,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <a href="javascript:void(0);" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                             </div>
                             <div class="col-lg-12">
                                 <nav>
@@ -188,7 +188,7 @@
                                         <li>
                                             <div class="d-flex justify-content-between fruite-name">
                                                 <a href="#"><i class="fas fa-apple-alt me-2"></i>{{$category->name}}</a>
-                                                <span>{{$category->activeProductCount()}}</span>
+                                                <span>({{$category->activeProductCount()}})</span>
                                             </div>
                                         </li>
                                         @endforeach

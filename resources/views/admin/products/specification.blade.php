@@ -88,13 +88,14 @@
                             <th class="px-4 py-3">Specification</th>
                             <th class="px-4 py-3">Values</th>
                             <th class="px-4 py-3">Amount</th>
+                            <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         @php  $i = 1; @endphp
                         @foreach ( $product->specification as $specs )
-                          <tr class="text-gray-700 dark:text-gray-400">
                             @foreach ( $specs->values as $val )
+                          <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3 text-sm">{{$i++}}</td>
                                 <td class="px-4 py-3 text-sm">{{$specs->specification}}</td>
                                 <td class="px-4 py-3 text-sm">{{$val->value}} 
@@ -103,12 +104,29 @@
                                     @endif                              
                                 </td>
                                 <td class="px-4 py-3 text-sm">{{$val->price}}</td>
+
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <a href="javascript:void(0)" class="delete" data-id="{{$val->id}}">
+                                          <button
+                                              class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                              aria-label="Delete">
+                                              <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                                  viewBox="0 0 20 20">
+                                                  <path fill-rule="evenodd"
+                                                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                      clip-rule="evenodd"></path>
+                                              </svg>
+                                          </button>
+                                        </a>
+                                    </div>
+                                </td>
                                
+                          </tr>
                             @endforeach
 
                                                     
                               
-                          </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -180,6 +198,46 @@ $(document).ready(function() {
             form.submit(); // or perform an AJAX request here
         }
     });
+
+    
+    $('.delete').on('click', function() {
+        var id = $(this).data('id');
+        // var form = $('#delete_' + id);
+        if (confirm("Are you sure you want to delete this value?")) {
+          
+            var current = $(this);
+            var currentRow = $(this).closest('tr');
+            var form = new FormData();
+            form.append("id", id);
+            form.append("_token", "{{csrf_token()}}");
+            form.append("_method", "DELETE");
+            url = "{{route('admin.product.specification.destroy',':id')}}";
+            url = url.replace(':id', id);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                // _token: "{{csrf_token()}}",
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}" // Add CSRF token in headers
+                },
+                data: null,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                  if(response == 1) {                    
+                      toastr.success("Specification value deleted successfully");
+                      currentRow.remove();
+                  }else {
+                    toastr.error("Something went wrong");
+                  }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error deleting item:", error);
+                }
+            });
+          }
+    });
+    
 });
 
 </script>
