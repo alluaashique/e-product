@@ -18,6 +18,7 @@ class Product extends Model
         'name',
         'uuid',
         'image',
+        'short_description',
         'description',
         'unit',
         'quantity',
@@ -35,10 +36,12 @@ class Product extends Model
                 $uuid = Str::uuid()->toString();
             } while ($model->where('uuid', $uuid)->exists());        
             $model->uuid = $uuid;
+            $model->short_description = $model->generateShortDescription($model->description);
         });
 
         static::updating(function ($model) {
             $model->name = ucwords($model->name);
+            $model->short_description = $model->generateShortDescription($model->description);
         });
     }
 
@@ -57,5 +60,18 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    function generateShortDescription($text, $max_length = 300) {
+        $text = strip_tags($text);
+        if (strlen($text) <= $max_length) {
+            return trim($text);
+        }
+        $trimmed = substr($text, 0, $max_length);
+        $last_space = strrpos($trimmed, ' ');
+        if ($last_space !== false) {
+            $trimmed = substr($trimmed, 0, $last_space);
+        }
+        return trim($trimmed . '...');
     }
 }

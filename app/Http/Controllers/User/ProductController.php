@@ -19,25 +19,35 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(Request $request)
-    { 
-
-        // <input type="search" class="form-control p-3" placeholder="keywords" name="search" aria-describedby="search-icon-1">
-      
-        // <select id="Sort" name="sort_by" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-        //     <option value="name_asc">Name (A-Z)</option>
-        //     <option value="name_desc">Name (Z-A)</option>
-        //     <option value="price_asc">Price (Low-High)</option>
-        //     <option value="price_desc">Price (High-Low)</option>
-        // </select>
-
-
-
-
-
+    {
         $data['products'] = Product::with('category', 'brand')
+                ->when($request->has('search'), function ($query) use ($request) {
+                    $search = $request->get('search');
+                    $query->where(function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                    });
+                })
+                ->when($request->has('sort_by'), function ($query) use ($request) {
+                    $sort_by = $request->get('sort_by');
+                    if($sort_by == "name_asc")
+                        $query->orderBy("name","asc");
+                    if($sort_by == "name_desc")
+                        $query->orderBy("name","desc");
+                    if($sort_by == "price_asc")
+                        $query->orderBy("price","asc");
+                    if($sort_by == "price_desc")
+                        $query->orderBy("price","desc");
+                })
+                ->when($request->has('category'), function ($query) use ($request) {
+                    $category = ProductCategory::where(["slug" => $request->category, "is_active" => 1  ])->first();
+                    if($category)
+                        $query->where('category_id', $category->id);                   
+                })
                 ->where('is_active', 1)
                 ->latest()
-                ->paginate(1);
+                ->paginate(12)
+                ->appends($request->query());
         $data['categories'] = ProductCategory::where('is_active', 1)
                 ->orderBy('name')
                 ->get();

@@ -61,7 +61,7 @@
 
 
                         @if(config('projectConfig.project_address'))
-                        {{-- <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">{{ config('projectConfig.project_address') }}</a></small> --}}
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="{{ config('projectConfig.project_location') }}" class="text-white">{{ config('projectConfig.project_address') }}</a></small>
                         @endif
                         @if(config('projectConfig.project_email'))
                         <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="mailto:{{ config('projectConfig.project_email') }}" class="text-white">{{ config('projectConfig.project_email') }}</a></small>
@@ -100,12 +100,12 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="{{ route('index')}}" class="nav-item nav-link  @if(Route::currentRouteName() == 'index') active @endif">Home</a>
-                            <a href="{{route('about')}}" class="nav-item nav-link">Shop</a>
-                            <a href="{{route('about')}}" class="nav-item nav-link">Shop Detail</a>
+                            <a href="{{route('product.index')}}" class="nav-item nav-link @if(Route::currentRouteName() == 'product.index') active @endif">Produts</a>
                             <a href="{{route('about')}}" class="nav-item nav-link @if(Route::currentRouteName() == 'about') active @endif">About</a>
                             <a href="{{route('blog.index')}}" class="nav-item nav-link @if (Str::startsWith(Route::currentRouteName(), 'blog')) active @endif">Blog</a>
 
 
+                            {{-- 
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -115,6 +115,7 @@
                                     <a href="404.html" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
+                            --}}
                             <a href="{{route('contact-us.index')}}" class="nav-item nav-link @if (Str::startsWith(Route::currentRouteName(), 'contact-us')) active @endif">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
@@ -144,8 +145,8 @@
                     </div>
                     <div class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                            <input type="search" class="form-control p-3" placeholder="keywords" id="search" name="search" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3 search-product"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
                 </div>
@@ -162,7 +163,7 @@
                 <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                     <div class="row g-4">
                         <div class="col-lg-3">
-                            <a href="#">
+                            <a href="{{route('index')}}">
                                 <h1 class="text-primary mb-0">{{ config('projectConfig.project_title') }}</h1>
                                 <p class="text-secondary mb-0">{{ config('projectConfig.project_tagline') }}</p>
                             </a>
@@ -175,10 +176,21 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="d-flex justify-content-end pt-3">
-                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                                @if(config('projectConfig.project_facebook'))
+                                    <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="{{ config('projectConfig.project_facebook') }}"><i class="fab fa-facebook-f"></i></a>
+                                @endif
+                                @if(config('projectConfig.project_twitter'))
+                                    <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href="{{ config('projectConfig.project_twitter') }}"><i class="fab fa-twitter"></i></a>
+                                @endif
+                                @if(config('projectConfig.project_youtube'))
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="{{ config('projectConfig.project_youtube') }}"><i class="fab fa-youtube"></i></a>
+                                @endif
+                                @if(config('projectConfig.project_instagram'))
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="{{ config('projectConfig.project_instagram') }}"><i class="fab fa-instagram"></i></a>
+                                @endif
+                                @if(config('projectConfig.project_whatsapp'))
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href="{{ config('projectConfig.project_whatsapp') }}"><i class="fab fa-whatsapp"></i></a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -195,32 +207,36 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Shop Info</h4>
-                            <a class="btn-link" href="">About Us</a>
-                            <a class="btn-link" href="">Contact Us</a>
-                            <a class="btn-link" href="">Privacy Policy</a>
-                            <a class="btn-link" href="">Terms & Condition</a>
-                            <a class="btn-link" href="">Return Policy</a>
-                            <a class="btn-link" href="">FAQs & Help</a>
+                            <a class="btn-link" href="{{ route('about') }}">About Us</a>
+                            <a class="btn-link" href="{{ route('contact-us.index') }}">Contact Us</a>
+                            <a class="btn-link" href="javascript:void(0)">Privacy Policy</a>
+                            <a class="btn-link" href="javascript:void(0)">Terms & Condition</a>
+                            <a class="btn-link" href="javascript:void(0)">Return Policy</a>
+                            <a class="btn-link" href="javascript:void(0)">FAQs & Help</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="">My Account</a>
-                            <a class="btn-link" href="">Shop details</a>
-                            <a class="btn-link" href="">Shopping Cart</a>
-                            <a class="btn-link" href="">Wishlist</a>
-                            <a class="btn-link" href="">Order History</a>
-                            <a class="btn-link" href="">International Orders</a>
+                            <a class="btn-link" href="javascript:void(0)">My Account</a>
+                            <a class="btn-link" href="javascript:void(0)">Shop details</a>
+                            <a class="btn-link" href="javascript:void(0)">Shopping Cart</a>
+                            <a class="btn-link" href="javascript:void(0)">Wishlist</a>
+                            <a class="btn-link" href="javascript:void(0)">Order History</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Contact</h4>
-                            <p>Address: 1429 Netus Rd, NY 48247</p>
-                            <p>Email: Example@gmail.com</p>
-                            <p>Phone: +0123 4567 8910</p>
-                            <p>Payment Accepted</p>
+                            @if(config('projectConfig.project_address'))                            
+                                <p>Address: <a href="{{ config('projectConfig.project_location') }}"> {{ config('projectConfig.project_address') }} </a></p>
+                            @endif
+                            @if(config('projectConfig.project_email'))                            
+                                <p>Email: <a href="mailto:{{ config('projectConfig.project_email') }}"> {{ config('projectConfig.project_email') }} </a> </p>
+                            @endif
+                            @if(config('projectConfig.project_phone'))                            
+                                <p>Phone: <a href="tel:{{ config('projectConfig.project_phone') }}"> {{ config('projectConfig.project_phone') }} </a> </p>
+                            @endif
                             <img src="{{ asset('user_assets/img/payment.png') }}" class="img-fluid" alt="">
                         </div>
                     </div>
@@ -265,5 +281,26 @@
     <!-- Template Javascript -->
     <script src="{{ asset('user_assets/js/main.js') }}"></script>
     </body>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.search-product').click(function () {
+                var search = $("#search").val().trim();
+                if (search === '') {
+                    e.preventDefault(); // Prevent form submission
+                    alert('Please enter a search term.'); // Notify the user
+                }
+                var url = "{{route('product.index')}}";
+                var params = [];
+                if (search) params.push("search=" + encodeURIComponent(search));
+                if (params.length > 0) {
+                    url += "?" + params.join("&");
+                }
+                window.location.href = url;
+            });
+        });
+
+    </script>
 
 </html>

@@ -22,7 +22,7 @@
                         <div class="row g-4">
                             <div class="col-xl-3">
                                 <div class="input-group w-100 mx-auto d-flex">
-                                    <input type="hidden" name="category" value="{{request('category')}}">
+                                    <input type="hidden" id="category" name="category" value="{{request('category')}}">
                                     <input type="search" class="form-control p-3" placeholder="keywords" value="{{request('search')}}" name="search" id="search" aria-describedby="search-icon-1">
                                     <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>                                    
                                 </div>
@@ -49,8 +49,8 @@
                                             <ul class="list-unstyled fruite-categorie">
                                                 @foreach($categories as $category)
                                                 <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="{{route('product.index').'?'.http_build_query(['category_id'=>$category->slug])}}"><i class="fas fa-apple-alt me-2"></i>{{$category->name}}</a>
+                                                    <div class="d-flex justify-content-between fruite-name" >
+                                                        <a href="{{route('product.index').'?'.http_build_query(['category'=>$category->slug])}}"   @if($category->slug == request('category')) style=""  @endif><i class="fas fa-apple-alt me-2"></i>{{$category->name}}</a>
                                                         <span>({{$category->activeProductCount()}})</span>
                                                     </div>
                                                 </li>
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="position-relative">
-                                            <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                                            <img data-url="{{asset('user_assets/img/banner-fruits.jpg')}}" class="img-fluid w-100 rounded" alt="">
                                             <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
                                                 <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
                                             </div>
@@ -183,29 +183,37 @@
                         $(this).attr('src', newSource);
                     });
                 }
-                // loadImages();
+                loadImages();
 
 
-                function submitform()
-                {
-                    search = $('#search').val();
-                    sort_by = $('#sort_by').val();
-                    category = $('#category').val();
-                    // $('#myForm').submit();
-                    var form = new FormData();
-                    form.append('search', search);
-                    form.append('sort_by', sort_by);
-                    form.append('category', category);
-                    form.submit();
+                function submitform() {
+                    var search = $('#search').val();
+                    var sort_by = $('#sort_by').val();
+                    var category = $('#category').val();
+
+                    var url = "{{route('product.index')}}";
+                    var params = [];
+
+                    if (search) params.push("search=" + encodeURIComponent(search));
+                    if (sort_by) params.push("sort_by=" + encodeURIComponent(sort_by));
+                    if (category) params.push("category=" + encodeURIComponent(category));
+
+                    if (params.length > 0) {
+                        url += "?" + params.join("&");
+                    }
+
+                    window.location.href = url;
                 }
 
 
-                $('#sort_by', '#search').on('change', function() {
-                    alert('change');
+
+                $('#search').on('change', function() {
+                    submitform();
+                });
+                $('#sort_by').on('change', function() {
                     submitform();
                 });
                 $('#search-icon-1').on('click', function() {
-                    alert('click');
                     submitform();
                 });
 

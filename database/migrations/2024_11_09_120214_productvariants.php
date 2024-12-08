@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('uuid')->unique();
             $table->string('image')->nullable();
+            $table->text('short_description')->nullable();
             $table->text('description')->nullable();
             $table->foreignId('unit')->default(3)->comment('1:piece, 11:kg, 21:litre');
             $table->string('quantity')->nullable();

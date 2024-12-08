@@ -228,7 +228,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="position-relative">
-                                    <img data-url="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <img data-url="{{asset('user_assets/img/banner-fruits.jpg')}}" class="img-fluid w-100 rounded" alt="">
                                     <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
                                         <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
                                     </div>
@@ -243,7 +243,7 @@
                         @foreach($related_products as $product)
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <img data-url="{{ asset('storage/'.$product->image) }}" class="img-fluid w-100 rounded-top" alt="">
+                                <img data-url="{{ asset('storage/'.$product->image) }}" style="width: 118 !important; height: 270px  !important; class="img-fluid w-100 rounded-top" alt="">
                             </div>
                             <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">{{ $product->category->name }}</div>
                             <div class="p-4 pb-0 rounded-bottom">

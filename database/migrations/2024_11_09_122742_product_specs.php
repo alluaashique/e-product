@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();    
             $table->foreignId('specification_id')->nullable()->constrained('specifications')->cascadeOnDelete();
             $table->string('specification')->nullable();
-            $table->tinyInteger('is_quantity')->default(0);
+            $table->tinyInteger('is_quantity')->default(0);            
+            $table->tinyInteger('is_weight')->default(0);
             $table->tinyInteger('is_active')->default(1)->comment('1:active, 0:inactive');
             $table->timestamps();
             $table->softDeletes();
