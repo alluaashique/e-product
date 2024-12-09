@@ -213,6 +213,7 @@
                             <a class="btn-link" href="javascript:void(0)">Terms & Condition</a>
                             <a class="btn-link" href="javascript:void(0)">Return Policy</a>
                             <a class="btn-link" href="javascript:void(0)">FAQs & Help</a>
+                            <a class="btn-link" href="{{asset('/brochure/brochure.pdf')}}">Brochure</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">

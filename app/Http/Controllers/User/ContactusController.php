@@ -19,7 +19,7 @@ class ContactusController extends Controller
     public function index()
     {
         $data["contactus"] = true;
-        return view('User.contactus.contactus', $data);
+        return view('user.contactus.contactus', $data);
     }   
 
     /**
