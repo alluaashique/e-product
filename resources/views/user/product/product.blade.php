@@ -22,8 +22,8 @@
                             <div class="col-xl-3">
                                 <div class="input-group w-100 mx-auto d-flex">
                                     <input type="hidden" id="category" name="category" value="{{request('category')}}">
-                                    <input type="search" class="form-control p-3" placeholder="keywords" value="{{request('search')}}" name="search" id="search" aria-describedby="search-icon-1">
-                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>                                    
+                                    <input type="search" class="form-control p-3" placeholder="keywords" value="{{request('search')}}" name="search" id="search2" aria-describedby="search-icon-1">
+                                    <span id="search-icon-1" class="input-group-text p-3 search-keyword"><i class="fa fa-search search-keyword"></i></span>                                    
                                 </div>
                             </div>
                             <div class="col-6"></div>
@@ -186,9 +186,9 @@
 
 
                 function submitform() {
-                    var search = $('#search').val();
-                    var sort_by = $('#sort_by').val();
-                    var category = $('#category').val();
+                    var search = $('#search2').val() ? $('#search2').val() : null;
+                    var sort_by = $('#sort_by').val() ? $('#sort_by').val() : null;
+                    var category = $('#category').val() ? $('#category').val() : null;
 
                     var url = "{{route('product.index')}}";
                     var params = [];
@@ -212,7 +212,7 @@
                 $('#sort_by').on('change', function() {
                     submitform();
                 });
-                $('#search-icon-1').on('click', function() {
+                $('.search-keyword').on('click', function() {
                     submitform();
                 });
 

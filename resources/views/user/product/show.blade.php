@@ -93,7 +93,7 @@
                                          <div class="d-flex">
                                              <img data-url="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                              <div class="">
-                                                 <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                                                 <p class="mb-2" style="font-size: 14px;">{{$review->created_at->format('M d, Y')}}</p>
                                                  <div class="d-flex justify-content-between">
                                                      <h5>{{$review->name}}</h5>
                                                      <div class="d-flex mb-3">
