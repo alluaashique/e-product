@@ -60,8 +60,8 @@
                     <div class="top-info ps-2">
 
 
-                        @if(config('projectConfig.project_address'))
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="{{ config('projectConfig.project_location') }}" class="text-white">{{ config('projectConfig.project_address') }}</a></small>
+                        @if(config('projectConfig.project_short_address'))
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="{{ config('projectConfig.project_location') }}" class="text-white">{{ config('projectConfig.project_short_address') }}</a></small>
                         @endif
                         @if(config('projectConfig.project_email'))
                         <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="mailto:{{ config('projectConfig.project_email') }}" class="text-white">{{ config('projectConfig.project_email') }}</a></small>

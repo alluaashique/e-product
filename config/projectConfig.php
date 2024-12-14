@@ -9,6 +9,7 @@ return [
     'project_email' => env('PROJECT_EMAIL'),
     'project_email2' => env('PROJECT_EMAIL2'),
     'project_address' => env('PROJECT_ADDRESS'),
+    'project_short_address' => env('PROJECT_SHORT_ADDRESS'),
     'project_phone' => env('PROJECT_PHONE'),
     'project_phone2' => env('PROJECT_PHONE2'),
     'project_instagram' => env('PROJECT_INSTAGRAM'),

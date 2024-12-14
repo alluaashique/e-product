@@ -9,8 +9,8 @@
                 <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
                 <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
                 <div class="position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
-                    <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
+                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text" placeholder="Search" id="search1" name="search1">
+                    <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100 search-product1" style="top: 0; right: 25%;">Submit Now</button>
                 </div>
             </div>
             <div class="col-md-12 col-lg-5">
@@ -535,6 +535,21 @@
         //         }
         //     });
         // });
+        $('.search-product1').click(function () {
+            var search = $("#search1").val().trim();
+            if (search === '') {
+                e.preventDefault(); // Prevent form submission
+                alert('Please enter a search term.'); // Notify the user
+            }
+            var url = "{{route('product.index')}}";
+            var params = [];
+            if (search) params.push("search=" + encodeURIComponent(search));
+            if (params.length > 0) {
+                url += "?" + params.join("&");
+            }
+            window.location.href = url;
+        });
+
     });
 </script>
 
