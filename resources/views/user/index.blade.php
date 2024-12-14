@@ -473,7 +473,8 @@
         }
         getProducts(null);        
         $('.show-product').click(function () {
-            var category = $(this).data('category');
+            $('.tab-content').html("");
+            var category = $(this).data('id');
             getProducts(category);
         });
 
